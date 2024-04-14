@@ -1289,7 +1289,7 @@ public class MainClass {
                     case 11:
                         exitFunction(old);
                         break;
-sdcscs
+
                 }
 
             } else {
