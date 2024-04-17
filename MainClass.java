@@ -1,6 +1,10 @@
-import java.nio.file.*;
 import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class General {
 
@@ -393,84 +397,84 @@ class Student extends Person {
     }
 
     static void addStudents() {
-		int temp = 0;
-		boolean valid = false;
+        int temp = 0;
+        boolean valid = false;
 
-		while (!valid) {
-			try {
-				System.out.print("Enter the number of new students: ");
-				temp = Integer.parseInt(sc.nextLine());
+        while (!valid) {
+            try {
+                System.out.print("Enter the number of new students: ");
+                temp = Integer.parseInt(sc.nextLine());
 
-				if (temp > 0) {
-					valid = true;
-				} else {
-					System.out.println("The number of students must be positive. Please try again.\n");
-				}
-			} catch (NumberFormatException e) {
-				System.out.println(General.RED + "Invalid input." + General.RESET);
-			}
-		}
+                if (temp > 0) {
+                    valid = true;
+                } else {
+                    System.out.println("The number of students must be positive. Please try again.\n");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(General.RED + "Invalid input." + General.RESET);
+            }
+        }
 
-		for (int i = 0; i < temp; i++) {
-			String[] spitedString = getNameFromUser("\nEnter the full name of Student " + (i + 1) + ": ").split(" ", 3);
-			long id = 0;
-			valid = false;
+        for (int i = 0; i < temp; i++) {
+            String[] spitedString = getNameFromUser("\nEnter the full name of Student " + (i + 1) + ": ").split(" ", 3);
+            long id = 0;
+            valid = false;
 
-			while (!valid) {
-				try {
-					System.out.print("Enter the ID of " + spitedString[0] + ": ");
-					id = Long.parseLong(sc.nextLine());
+            while (!valid) {
+                try {
+                    System.out.print("Enter the ID of " + spitedString[0] + ": ");
+                    id = Long.parseLong(sc.nextLine());
 
-					if (!totalStudents.contains(new Student(id))) {
-						if (id > 0) {
-							valid = true;
-						} else {
-							System.out.println("The ID must be positive. Please try again.\n");
-						}
-					} else {
-						System.out.println("This ID is already in use. Please try a different one.\n");
-					}
-				} catch (NumberFormatException e) {
-					System.out.println(General.RED + "Invalid input. Please enter a valid number." + General.RESET);
-				}
-			}
+                    if (!totalStudents.contains(new Student(id))) {
+                        if (id > 0) {
+                            valid = true;
+                        } else {
+                            System.out.println("The ID must be positive. Please try again.\n");
+                        }
+                    } else {
+                        System.out.println("This ID is already in use. Please try a different one.\n");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(General.RED + "Invalid input. Please enter a valid number." + General.RESET);
+                }
+            }
 
-			String password;
+            String password;
 
-			do {
-				System.out.print("Enter the password of " + spitedString[0] + ": ");
-				password = sc.nextLine();
+            do {
+                System.out.print("Enter the password of " + spitedString[0] + ": ");
+                password = sc.nextLine();
 
-				if (password.contains(" "))
-					System.out.println(General.RED + "Password does not contain space.\n" + General.RESET);
-			} while (password.contains(" "));
+                if (password.contains(" "))
+                    System.out.println(General.RED + "Password does not contain space.\n" + General.RESET);
+            } while (password.contains(" "));
 
-			int year = 0;
-			valid = false;
+            int year = 0;
+            valid = false;
 
-			while (!valid) {
-				try {
-					System.out.print("Enter the current year of study: ");
-					year = Integer.parseInt(sc.nextLine());
+            while (!valid) {
+                try {
+                    System.out.print("Enter the current year of study: ");
+                    year = Integer.parseInt(sc.nextLine());
 
-					if (year >= 1 && year  <= 4) {
-						valid = true;
-					} else {
-						System.out.println(
-							General.RED + "Invalid year. Please enter a year between 1 and 4." + General.RESET);
-					}
-				} catch (NumberFormatException e) {
-					System.out.println(General.RED + "Invalid input.\n" + General.RESET);
-				}
-			}
+                    if (year >= 1 && year <= 4) {
+                        valid = true;
+                    } else {
+                        System.out.println(
+                                General.RED + "Invalid year. Please enter a year between 1 and 4." + General.RESET);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(General.RED + "Invalid input.\n" + General.RESET);
+                }
+            }
 
-			Student temporary = new Student(id, password, spitedString, year);
-			totalStudents.add(temporary);
-		}
+            Student temporary = new Student(id, password, spitedString, year);
+            totalStudents.add(temporary);
+        }
 
-		System.out
-			.println(General.CYAN + "Now the total number of students is " + totalStudents.size() + General.RESET);
-	}
+        System.out
+                .println(General.CYAN + "Now the total number of students is " + totalStudents.size() + General.RESET);
+    }
 
     public static void showAllRegisteredStudents() {
         System.out.println(General.YELLOW + "\nAccess Restricted: Only administrators can view all student details.\n" +
@@ -825,7 +829,6 @@ class DataSaver {
 
     private static void writeAdminData(BufferedWriter writer) throws IOException {
         writer.write(printline() + "-" + printspace() + " ADMIN DATA " + printspace() + "-\n" + printline());
-
         for (Admin admin : Admin.totalAdmins) {
             writer.write(formatAdminData(admin));
             writer.newLine();
@@ -872,31 +875,33 @@ class DataSaver {
     }
 
     private static void rewriteAdminDatabase() {
-        try (PrintWriter pw = new PrintWriter(new File(ADMIN_DATABASE_FILE))) {
+        try (BufferedWriter pw = new BufferedWriter(new FileWriter(ADMIN_DATABASE_FILE))) {
             for (Admin admin : Admin.totalAdmins) {
                 StringJoiner joiner = new StringJoiner(",");
                 joiner.add(admin.getUsername())
                         .add(admin.getPassword())
                         .add(String.join(" ", admin.Name));
-                pw.println(joiner.toString());
+                pw.write(joiner.toString());
+                pw.newLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Error writing admin database: " + e.getMessage());
         }
     }
 
     private static void rewriteStudentDatabase() {
-        try (PrintWriter pw = new PrintWriter(new File(STUDENT_DATABASE_FILE))) {
+        try (BufferedWriter pw = new BufferedWriter(new FileWriter(STUDENT_DATABASE_FILE))) {
             for (Student student : Student.totalStudents) {
                 StringJoiner joiner = new StringJoiner(",");
                 joiner.add(Long.toString(student.idOfStudent))
                         .add(student.getPassword()).add(Integer.toString(student.yearOfStudy))
                         .add(Integer.toString(student.isSBGmember)).add(String.join(" ",
                                 student.Name));
-                pw.println(joiner.toString());
+                pw.write(joiner.toString());
+                pw.newLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Error writing student database: " + e.getMessage());
         }
     }
 
@@ -987,12 +992,11 @@ class DataSaver {
 
     private static List<String[]> readCSV(String fileName) throws IOException {
         List<String[]> data = new ArrayList<>();
-        Path filePath = Paths.get(fileName);
+        File file = new File(fileName);
 
-        if (Files.exists(filePath)) {
-            try (BufferedReader br = Files.newBufferedReader(filePath)) {
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
-
                 while ((line = br.readLine()) != null) {
                     data.add(line.split(","));
                 }
@@ -1003,6 +1007,7 @@ class DataSaver {
 
         return data;
     }
+
 }
 
 public class MainClass {
@@ -1223,11 +1228,12 @@ public class MainClass {
 
     public static void main(String[] args) {
 
-        startingDisplay();
+        // startingDisplay();
 
-        checktrustee();
+        // checktrustee();
 
-        if (Files.exists(Paths.get("Admin_database.csv")))
+        File file = new File("Admin_database.csv");
+        if (file.exists())
             data = DataSaver.fetchData("");
         else
             data = true;
@@ -1298,6 +1304,7 @@ public class MainClass {
             } else {
                 System.out.println(General.RED + "Your input is invalid..." + General.RESET + "please try again...");
             }
+
         } while (true);
 
     }
