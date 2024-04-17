@@ -393,84 +393,84 @@ class Student extends Person {
     }
 
     static void addStudents() {
-        int temp = 0;
-        boolean valid = false;
+		int temp = 0;
+		boolean valid = false;
 
-        while (!valid) {
-            try {
-                System.out.print("Enter the number of new students: ");
-                temp = Integer.parseInt(sc.nextLine());
+		while (!valid) {
+			try {
+				System.out.print("Enter the number of new students: ");
+				temp = Integer.parseInt(sc.nextLine());
 
-                if (temp > 0) {
-                    valid = true;
-                } else {
-                    System.out.println("The number of students must be positive. Please try again.\n");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(General.RED + "Invalid input." + General.RESET);
-            }
-        }
+				if (temp > 0) {
+					valid = true;
+				} else {
+					System.out.println("The number of students must be positive. Please try again.\n");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println(General.RED + "Invalid input." + General.RESET);
+			}
+		}
 
-        for (int i = 0; i < temp; i++) {
-            String[] spitedString = getNameFromUser("\nEnter the full name of Student " + (i + 1) + ": ").split(" ", 3);
-            long id = 0;
-            valid = false;
+		for (int i = 0; i < temp; i++) {
+			String[] spitedString = getNameFromUser("\nEnter the full name of Student " + (i + 1) + ": ").split(" ", 3);
+			long id = 0;
+			valid = false;
 
-            while (!valid) {
-                try {
-                    System.out.print("Enter the ID of " + spitedString[0] + ": ");
-                    id = Long.parseLong(sc.nextLine());
+			while (!valid) {
+				try {
+					System.out.print("Enter the ID of " + spitedString[0] + ": ");
+					id = Long.parseLong(sc.nextLine());
 
-                    if (!totalStudents.contains(new Student(id))) {
-                        if (id > 0) {
-                            valid = true;
-                        } else {
-                            System.out.println("The ID must be positive. Please try again.\n");
-                        }
-                    } else {
-                        System.out.println("This ID is already in use. Please try a different one.\n");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println(General.RED + "Invalid input. Please enter a valid number." + General.RESET);
-                }
-            }
+					if (!totalStudents.contains(new Student(id))) {
+						if (id > 0) {
+							valid = true;
+						} else {
+							System.out.println("The ID must be positive. Please try again.\n");
+						}
+					} else {
+						System.out.println("This ID is already in use. Please try a different one.\n");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println(General.RED + "Invalid input. Please enter a valid number." + General.RESET);
+				}
+			}
 
-            String password;
+			String password;
 
-            do {
-                System.out.print("Enter the password of " + spitedString[0] + ": ");
-                password = sc.nextLine();
+			do {
+				System.out.print("Enter the password of " + spitedString[0] + ": ");
+				password = sc.nextLine();
 
-                if (password.contains(" "))
-                    System.out.println(General.RED + "Password does not contain space.\n" + General.RESET);
-            } while (password.contains(" "));
+				if (password.contains(" "))
+					System.out.println(General.RED + "Password does not contain space.\n" + General.RESET);
+			} while (password.contains(" "));
 
-            int year = 0;
-            valid = false;
+			int year = 0;
+			valid = false;
 
-            while (!valid) {
-                try {
-                    System.out.print("Enter the current year of study: ");
-                    year = Integer.parseInt(sc.nextLine());
+			while (!valid) {
+				try {
+					System.out.print("Enter the current year of study: ");
+					year = Integer.parseInt(sc.nextLine());
 
-                    if (year >= 1 && year <= 4) {
-                        valid = true;
-                    } else {
-                        System.out.println(
-                                General.RED + "Invalid year. Please enter a year between 1 and 4." + General.RESET);
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println(General.RED + "Invalid input.\n" + General.RESET);
-                }
-            }
+					if (year >= 1 && year  <= 4) {
+						valid = true;
+					} else {
+						System.out.println(
+							General.RED + "Invalid year. Please enter a year between 1 and 4." + General.RESET);
+					}
+				} catch (NumberFormatException e) {
+					System.out.println(General.RED + "Invalid input.\n" + General.RESET);
+				}
+			}
 
-            Student temporary = new Student(id, password, spitedString, year);
-            totalStudents.add(temporary);
-        }
+			Student temporary = new Student(id, password, spitedString, year);
+			totalStudents.add(temporary);
+		}
 
-        System.out
-                .println(General.CYAN + "Now the total number of students is " + totalStudents.size() + General.RESET);
-    }
+		System.out
+			.println(General.CYAN + "Now the total number of students is " + totalStudents.size() + General.RESET);
+	}
 
     public static void showAllRegisteredStudents() {
         System.out.println(General.YELLOW + "\nAccess Restricted: Only administrators can view all student details.\n" +
@@ -526,15 +526,17 @@ class Student extends Person {
         boolean done = false;
 
         do {
-            System.out.println("\nCurrent information of the student:");
-            System.out.println("ID: " + student.idOfStudent);
-            System.out.println("First Name: " + student.getName());
-            System.out.println("Middle Name: " + (student.Name.length > 1 ? student.Name[1] : ""));
-            System.out.println("Last Name: " + (student.Name.length > 2 ? student.Name[2] : ""));
-            System.out.println("Password: " + student.password);
-            System.out.println("Year of study: " + student.yearOfStudy);
+            System.out.println(General.PURPLE + General.BOLD + "\nCurrent information of the student:" + General.RESET);
+            System.out.println(General.CYAN + "ID: " + General.RESET + student.idOfStudent);
+            System.out.println(General.CYAN + "First Name: " + General.RESET + student.getName());
+            System.out.println(
+                    General.CYAN + "Middle Name: " + General.RESET + (student.Name.length > 1 ? student.Name[1] : ""));
+            System.out.println(
+                    General.CYAN + "Last Name: " + General.RESET + (student.Name.length > 2 ? student.Name[2] : ""));
+            System.out.println(General.CYAN + "Password: " + General.RESET + student.password);
+            System.out.println(General.CYAN + "Year of study: " + General.RESET + student.yearOfStudy);
 
-            System.out.println("\nChoose the field to be edited:");
+            System.out.println(General.PURPLE + General.BOLD + "\nChoose the field to be edited:" + General.RESET);
             System.out.println("1. First Name");
             System.out.println("2. Middle Name");
             System.out.println("3. Last Name");
@@ -542,7 +544,7 @@ class Student extends Person {
             System.out.println("5. Year of study");
             System.out.println("6. Exit");
 
-            System.out.print("Enter your choice (1-8): ");
+            System.out.print("Enter your choice (1-6): ");
 
             try {
                 int choice = Integer.parseInt(sc.nextLine());
@@ -1118,7 +1120,7 @@ public class MainClass {
     }
 
     final static void startingDisplay() {
-        System.out.println(General.YELLOW + General.BOLD +
+        System.out.println(General.GREEN + General.BOLD +
                 "\nWelcome to the DA-IICT Trustee Simulator!\nIn this program, you will experience what it is like to be a trustee of DA-IICT, a university in India.\nTo start, please follow these steps:\n- Enter your username.\n- Enter your password.\n- Sign in to the management portal of the university as a trustee.\n"
                 +
                 General.RESET);
@@ -1131,7 +1133,7 @@ public class MainClass {
 
         do {
             if (!usernameCorrect) {
-                System.out.print("Enter the username: ");
+                System.out.print(General.PURPLE + "Enter the username: ");
                 String inputUsername = sc.nextLine();
 
                 if (USERNAME.equals(encrypt(inputUsername))) {
@@ -1142,16 +1144,17 @@ public class MainClass {
             }
 
             if (usernameCorrect) {
-                System.out.println("Hello, Anil sir. Welcome to our DA-IICT portal.");
-                System.out.print("Enter the password: ");
+                System.out.println(General.RESET +
+                        General.BOLD + "Hello, Anil sir. Welcome to our DA-IICT portal." + General.RESET);
+                System.out.print(General.PURPLE + "Enter the password: ");
                 String inputPassword = sc.nextLine();
 
                 if (PASSWORD.equals(encrypt(inputPassword))) {
-                    System.out.println(General.BOLD + "You are successfully verified as the trustee of DA-IICT." +
-                            General.RESET);
+                    System.out.println(General.RESET + General.BOLD +
+                            "You are successfully verified as the trustee of DA-IICT." + General.RESET);
                     verified = true;
                 } else {
-                    System.out.println("Invalid password!");
+                    System.out.println(General.RED + "Invalid password!" + General.RESET);
                 }
             }
 
@@ -1161,7 +1164,7 @@ public class MainClass {
                 if (loginAttempts < General.MAX_ATTEMPTS) {
                     System.out.println("You have now " + (General.MAX_ATTEMPTS - loginAttempts) + " chances.\n");
                 } else {
-                    System.out.println("Now you ran out of chances.\n");
+                    System.out.println(General.RED + "Now you ran out of chances.\n" + General.RESET);
                     System.exit(0);
                 }
             }
@@ -1220,9 +1223,9 @@ public class MainClass {
 
     public static void main(String[] args) {
 
-        // startingDisplay();
+        startingDisplay();
 
-        // checktrustee();
+        checktrustee();
 
         if (Files.exists(Paths.get("Admin_database.csv")))
             data = DataSaver.fetchData("");
