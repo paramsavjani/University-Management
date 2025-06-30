@@ -1,70 +1,53 @@
-# Integrated College Management System
+# 🎓 Integrated College Management System
 
-## Overview
+## 📚 Overview
 
-This project is a Java-based Integrated College Management System that utilizes core Object-Oriented Programming (OOP) concepts, including classes, inheritance, encapsulation, abstraction, and polymorphism. It allows for management of administrators and students in a college, including enrollment, credential management, and operations related to the Student Body Government (SBG).
+This Java-based project demonstrates OOP principles (inheritance, encapsulation, abstraction, polymorphism) to manage college operations involving admins, students, and SBG members, with persistent data storage.
 
-## Features
+## 🚀 Features
 
-* **Secure Trustee Login:** Trustee credentials (username/password) are encrypted and verified at startup, with a maximum of three attempts.
-* **Admin Management:**
+✅ Secure trustee login with encrypted credentials
+✅ Admin management: add, remove, login
+✅ Student management: enroll, remove, edit, view
+✅ SBG management: add, remove, replace, view members
+✅ Data persistence using CSV/TXT files
+✅ Color-coded console outputs
 
-  * Add or remove admins.
-  * Admin credentials and details are stored in CSV files.
-  * Login system with username/password validation.
-* **Student Management:**
+## 🛠️ Setup & Usage
 
-  * Enroll new students with attributes like ID, year of study, and SBG membership.
-  * Remove students from the system.
-  * Edit student details (except year of study for students themselves).
-  * Students have a login system similar to admins.
-* **SBG Management:**
+1️⃣ Compile Java files using `javac`
+2️⃣ Run `MainClass`
+3️⃣ Use credentials:
 
-  * Add, remove, or replace SBG members from the pool of enrolled students.
-  * View list of current SBG members.
-* **Data Persistence:**
+* 🔐 Username: `AnilAmbani`
+* 🔑 Password: `DhirubhaiAmbani`
+  4️⃣ Navigate menu to manage admins, students, and SBG
 
-  * Uses CSV files to persist data across sessions.
-  * Data is saved by creating new files on updates, leveraging Java's `ArrayList` for in-memory storage.
-  * Data export to TXT files for record-keeping.
-* **UML Diagrams:**
+## 📂 Class Responsibilities
 
-  * Project includes class and use-case diagrams describing the flow and interactions of components.
+* `General`: Utility methods, ANSI color codes
+* `Person`: Abstract base class for `Admin` and `Student`
+* `Admin`: Manage admins, credential handling
+* `Student`: Manage student data, editing functions
+* `SBG`: Manage student body government
+* `DataSaver`: Handle file read/write operations
 
-## Technologies Used
+## 📊 UML Diagram
 
-* Java (OOP, Collections, File I/O)
-* CSV and TXT file handling
+![UML Diagram](diagram.png)
 
-## How to Run
+## 📌 Future Enhancements
 
-1. Compile the Java files using a Java compiler (e.g., `javac`).
-2. Run the `MainClass`.
-3. Use the following trustee credentials when prompted:
+✨ Switch to relational database
+✨ Stronger encryption
+✨ Build GUI with JavaFX/Swing
+✨ Enhanced role-based permissions
 
-   * **Username:** AnilAmbani
-   * **Password:** DhirubhaiAmbani
-4. Follow on-screen menus to perform administrative tasks, student management, and SBG operations.
+## 👥 Authors
 
-## Important Notes
+👩‍🎓 Nidhi Dodiya (202303009)
+👨‍🎓 Param Savjani (202303046)
 
-* The system creates `Admin_database.csv` and `Student_database.csv` at runtime if they do not exist.
-* Password encryption uses a simple XOR with a secret key ("secret") for basic obfuscation.
-* Files are updated by overwriting with new data when changes are made.
-* Trustee credentials are encrypted in the code and cannot be decrypted once compiled.
+## ⚖️ License
 
-## Future Improvements
-
-* Switch to using a relational database instead of CSV files.
-* Enhance encryption with stronger algorithms.
-* Implement a GUI using JavaFX or Swing.
-* Add role-based access control for finer-grained permissions.
-
-## Authors
-
-* Nidhi Dodiya (202303009)
-* Param Savjani (202303046)
-
-## License
-
-This project is for educational purposes.
+For educational purposes only.
