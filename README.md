@@ -36,17 +36,10 @@ This Java-based project demonstrates OOP principles (inheritance, encapsulation,
 
 ![UML Diagram](diagram.png)
 
-## 📌 Future Enhancements
-
-✨ Switch to relational database
-✨ Stronger encryption
-✨ Build GUI with JavaFX/Swing
-✨ Enhanced role-based permissions
-
 ## 👥 Authors
 
-👩‍🎓 Nidhi Dodiya (202303009)
 👨‍🎓 Param Savjani (202303046)
+👩‍🎓 Nidhi Dodiya (202303009)
 
 ## ⚖️ License
 
