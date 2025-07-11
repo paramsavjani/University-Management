@@ -118,8 +118,8 @@ It models real-world college operations such as:
 
 1️⃣ **Clone or download the repository**
 
-    git clone https://github.com/NidhiDodiya1014/University-Management-System
-    cd .\University-Management-System 
+    git clone https://github.com/paramsavjani/University-Management.git
+    cd University-Management
 
 2️⃣ **Compile all Java files**
 
